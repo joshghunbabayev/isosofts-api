@@ -1,0 +1,62 @@
+!!!!!!! login olan hami ucun
+
+req:
+GET http://localhost:7777/api/account/staff?isActive=?token=
+
+query də "isActive" var 
+  1 olsa aktivler
+  0 olsa qeyriaktivler
+  umumiyyetle olmasa, hamisi
+  
+res:
+
+if error: s-t 401
+
+eger  okeydirse, list gelecek
+
+[
+  {
+    "id": "X1394MEZ5635yx4mD8Ds3J52491JMg",
+    "companyId": "9HjwC6CqA19661w83o82487v2VxG31",
+    "lineManagerId": "",
+    "isAdmin": 0,
+    "isActive": 0,
+    "name": "",
+    "surname": "",
+    "email": "",
+    "phoneNumber": ""
+  },
+  {
+    "id": "9P931xCfJJ6vrGV2839ZBS0p94744h",
+    "companyId": "9HjwC6CqA19661w83o82487v2VxG31",
+    "lineManagerId": "X1394MEZ5635yx4mD8Ds3J52491JMg",
+    "isAdmin": 0,
+    "isActive": 1,
+    "name": "sadasdad",
+    "surname": "sss",
+    "email": "m2@etesTcs.com",
+    "phoneNumber": "0999999"
+  },
+  {
+    "id": "aIA1A926p4i3tHXiY8nAdur2u5519c",
+    "companyId": "9HjwC6CqA19661w83o82487v2VxG31",
+    "lineManagerId": "X1394MEZ5635yx4mD8Ds3J52491JMg",
+    "isAdmin": 0,
+    "isActive": 1,
+    "name": "sadasdasfasdsadad",
+    "surname": "ssssss",
+    "email": "m222@etesTcs.com",
+    "phoneNumber": "0999sss999"
+  },
+  {
+    "id": "67ta7Fhj21uX16v41936DK99wFASRJ",
+    "companyId": "9HjwC6CqA19661w83o82487v2VxG31",
+    "lineManagerId": "X1394MEZ5635yx4mD8Ds3J52491JMg",
+    "isAdmin": 0,
+    "isActive": 1,
+    "name": "sadasdasfasdsadad",
+    "surname": "ssssss",
+    "email": "m22sss2@etesTcs.com",
+    "phoneNumber": "0999sss999"
+  }
+]

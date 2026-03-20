@@ -1,0 +1,16 @@
+kpi
+br - Context of Organisation, Business Risks, Opportunities & Objectives Register
+hsr - Health & Safety Risks Register
+leg - Legislation Register
+eai - Environmental Aspects & Impact Register
+ei - Equipment & Inventory Register
+tra - Training Register
+doc - Documents Register
+ven - Vendor Register
+cus - Customer Register
+fb - Feedback Register
+ea - Employee Performance Appraisal Register
+moc - Management of Changes Register
+fin - Findings Reg
+aop - Assurance & Oversight Program
+mrm - Management Review Meeting Register

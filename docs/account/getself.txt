@@ -1,0 +1,22 @@
+!!!!!!! login olan hami ucun
+
+req:
+GET http://localhost:7777/api/account/self?token=
+
+res:
+
+if error: s-t 401
+
+eger  okeydirse, adamin datasi gelecek
+
+burada isAdmin, 1 dirse adam admin, 0 dirsa admin deyil
+
+{
+  "id": "X1394MEZ5635yx4mD8Ds3J52491JMg",
+  "companyId": "9HjwC6CqA19661w83o82487v2VxG31",
+  "isAdmin": 1,
+  "name": "sadasdad",
+  "surname": "sss",
+  "email": "m@etesTcs.com",
+  "phoneNumber": "0999999"
+}

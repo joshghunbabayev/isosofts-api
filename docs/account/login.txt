@@ -1,0 +1,41 @@
+req:
+POST http://localhost:7777/api/account/login
+
+body
+{
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+res:
+
+if error
+
+sc- 400
+{
+  "errors": {
+    "email": "Email is required",
+    "password": "Password is required"
+  }
+}
+
+eger mail ve ya parol sehvdirse
+
+{
+  "error": "Invalid email or password"
+}
+
+eger deaktivdirse (isActive=0 yəni)
+
+{
+  "error": "This account is inactive. Please contact your admin."
+}
+
+eger her sey okeydirse
+
+{
+  "message": "Login successful",
+  "token": "eyJhbGciOiJIU...."
+}
+
+auth token!!!

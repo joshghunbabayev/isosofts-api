@@ -1,0 +1,37 @@
+!!!!!!! sadece admin ucun
+
+req:
+PUT http://localhost:7777/api/company/self?token=
+
+body: 
+	var body struct {
+		Name        string `json:"name"`
+	}
+
+!!!! admin formda, sadəcə dəyişənləri yox, hər şeyi tam göndərir
+
+res: 
+
+if error
+
+hər bir parametrə uyğun xətalar, və eyni anda bir dən çox xəta. hamısı bir dəfəllik yoxlanır
+
+numuneler
+
+sc- 400
+
+{
+  "errors": {
+    "name": "Name is required"
+  }
+}
+
+{
+  "error": "Only admins can access this route"
+}
+
+eger her sey okeydirse
+
+{
+  "message": "Company name updated successfully"
+}

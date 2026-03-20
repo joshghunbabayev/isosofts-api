@@ -1,0 +1,16 @@
+!!!!!!! login olan hami ucun
+
+req:
+GET http://localhost:7777/api/company/self?token=
+
+res:
+
+if error: s-t 401
+
+eger  okeydirse, id-si olan adam gelecek
+
+{
+  "id": "9HjwC6CqA19661w83o82487v2VxG31",
+  "name": "Test C",
+  "domain": "etestcs.com"
+}

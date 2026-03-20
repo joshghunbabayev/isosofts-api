@@ -1,0 +1,169 @@
+======================================================================
+                ISOSOFTS - SUPER ADMIN API DOCUMENTATION
+======================================================================
+Base URL: http://localhost:8000/api/admin
+Auth: Bütün qorunan endpoint-lər üçün URL-də ?token={JWT} tələb olunur.
+
+----------------------------------------------------------------------
+1. AUTHENTICATION
+----------------------------------------------------------------------
+
+REQ: POST /api/superAdmin/login
+BODY:
+{
+    "password1": "string",
+    "password2": "string"
+}
+RES (200):
+{
+    "token": "eyJhbGciOiJI..."
+}
+RES (401): Unauthorized (Şifrələr .env ilə uyğun deyil)
+
+----------------------------------------------------------------------
+2. COMPANY MANAGEMENT (ŞİRKƏT İDARƏETMƏSİ)
+----------------------------------------------------------------------
+
+REQ: GET /api/superAdmin/companies?token={JWT}&isActive={1|0}
+RES (200):
+[
+    {
+        "id": "string",
+        "name": "string",
+        "domain": "string",
+        "isActive": 1
+    }
+]
+
+---
+
+REQ: POST /api/superAdmin/company?token={JWT}
+BODY:
+{
+    "name": "Company Name",
+    "domain": "company.com"
+}
+RES (201): { "message": "Company created successfully" }
+RES (400):
+{
+    "errors": {
+        "name": "Company name is required",
+        "domain": "Invalid domain format (e.g., company.com)"
+    }
+}
+
+---
+
+REQ: PUT /api/superAdmin/company/:companyId/active?token={JWT}
+RES (200): { "message": "Company activated" }
+
+---
+
+REQ: PUT /api/superAdmin/company/:companyId/unactive?token={JWT}
+RES (200): { "message": "Company deactivated" }
+
+----------------------------------------------------------------------
+3. ACCOUNT MANAGEMENT (İSTİFADƏÇİ İDARƏETMƏSİ)
+----------------------------------------------------------------------
+
+REQ: GET /api/superAdmin/accounts?token={JWT}&companyId={id}&isActive={1|0}
+DESC: Bütün sistemdəki istifadəçiləri (və ya filtrə əsasən) gətirir.
+RES (200): [ {Account Object}, ... ]
+
+---
+
+REQ: GET /api/superAdmin/company/:companyId/accounts?token={JWT}&isActive={1|0}
+DESC: Konkret bir şirkətin bütün işçilərini gətirir.
+RES (200): [ {Account Object}, ... ]
+
+---
+
+REQ: POST /api/superAdmin/company/:companyId/account?token={JWT}
+BODY:
+{
+    "name": "Ali",
+    "surname": "Veli",
+    "email": "ali@company.com",
+    "phoneNumber": "0550000000",
+    "password": "password123",
+    "confirmPassword": "password123",
+    "isAdmin": 1
+}
+RES (201): { "message": "Account created" }
+RES (400):
+{
+    "errors": {
+        "email": "Email must belong to domain: company.com",
+        "password": "Password must be at least 6 characters",
+        "confirmPassword": "Passwords do not match"
+    }
+}
+
+---
+
+REQ: GET /api/superAdmin/user/:id?token={JWT}
+RES (200): {Account Object}
+RES (404): Error - Not found
+
+---
+
+REQ: PUT /api/superAdmin/user/:id?token={JWT}
+BODY: (İstənilən sahə göndərilə bilər)
+{
+    "name": "string",
+    "surname": "string",
+    "email": "string",
+    "phoneNumber": "string",
+    "isAdmin": 0
+}
+RES (200): { "message": "Updated" }
+
+---
+
+REQ: PUT /api/superAdmin/user/:id/lineManager?token={JWT}
+BODY: { "lineManagerId": "manager_uuid" }
+RES (200): { "message": "Line Manager updated" }
+
+---
+
+REQ: PUT /api/superAdmin/user/:id/password?token={JWT}
+BODY:
+{
+    "password": "string",
+    "confirmPassword": "string"
+}
+RES (200): { "message": "Password updated" }
+
+---
+
+REQ: PUT /api/superAdmin/user/:id/active?token={JWT}
+RES (200): { "message": "User activated" }
+
+---
+
+REQ: PUT /api/superAdmin/user/:id/unactive?token={JWT}
+RES (200): { "message": "User deactivated" }
+
+----------------------------------------------------------------------
+4. ACCESS MANAGEMENT (İCAZƏLƏR)
+----------------------------------------------------------------------
+
+REQ: GET /api/superAdmin/user/:id/access?token={JWT}
+RES (200):
+[
+    { "accountId": "uuid", "register": "BR" },
+    { "accountId": "uuid", "register": "FIN" }
+]
+
+---
+
+REQ: POST /api/superAdmin/user/:id/access?token={JWT}&register={MODULE_NAME}
+DESC: Məsələn: ?register=moc
+RES (200): { "message": "Access added" }
+
+---
+
+REQ: DELETE /api/superAdmin/user/:id/access?token={JWT}&register={MODULE_NAME}
+RES (200): { "message": "Access removed" }
+
+======================================================================

@@ -1,0 +1,30 @@
+!!!!!!! sadece admin ucun
+
+req:
+GET http://localhost:7777/api/account/staff/:id/access?&token=
+
+res: 
+
+if error
+
+
+404 {"error": "Staff member not found"}
+
+{"error": "Failed to retrieve accesses"}
+
+
+eger her sey okeydirse
+[
+  {
+    "accountId": "X1394MEZ5635yx4mD8Ds3J52491JMg",
+    "register": "a"
+  },
+  {
+    "accountId": "X1394MEZ5635yx4mD8Ds3J52491JMg",
+    "register": "b"
+  },
+  {
+    "accountId": "X1394MEZ5635yx4mD8Ds3J52491JMg",
+    "register": "c"
+  }
+]

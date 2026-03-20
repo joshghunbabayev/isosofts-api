@@ -1,0 +1,45 @@
+!!!!!!! sadece admin ucun
+
+req:
+PUT http://localhost:7777/api/account/staff/:id?token=
+
+body: 
+	var body struct {
+		Name        string `json:"name"`
+		Surname     string `json:"surname"`
+		Email       string `json:"email"`
+		PhoneNumber string `json:"phoneNumber"`
+	}
+
+!!!! admin formda, sadəcə dəyişənləri yox, hər şeyi tam göndərir
+
+res: 
+
+if error
+
+hər bir parametrə uyğun xətalar, və eyni anda bir dən çox xəta. hamısı bir dəfəllik yoxlanır
+
+numuneler
+
+sc- 400
+
+{
+  "errors": {
+    "email": "This domain is already registered",
+    "name": "Name is required",
+    "password": "Password must be at least 6 characters long"
+  }
+}
+
+{
+  "errors": {
+    "email": "Invalid email format",
+    "surname": "Surname is required"
+  }
+}
+
+eger her sey okeydirse
+
+{
+  "message": "Registration successful"
+}

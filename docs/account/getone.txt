@@ -1,0 +1,22 @@
+!!!!!!! login olan hami ucun
+
+req:
+GET http://localhost:7777/api/account/staff/:id?token=
+
+res:
+
+if error: s-t 401
+
+eger  okeydirse, id-si olan adam gelecek
+
+{
+  "id": "aIA1A926p4i3tHXiY8nAdur2u5519c",
+  "companyId": "9HjwC6CqA19661w83o82487v2VxG31",
+  "lineManagerId": "X1394MEZ5635yx4mD8Ds3J52491JMg",
+  "isAdmin": 0,
+  "isActive": 1,
+  "name": "sadasdasfasdsadad",
+  "surname": "ssssss",
+  "email": "m222@etesTcs.com",
+  "phoneNumber": "0999sss999"
+}

@@ -1,0 +1,49 @@
+!!!!!!! sadece admin ucun
+
+req:
+POST http://localhost:7777/api/account/staff?token=
+
+	var body struct {
+		Name            string `json:"name"`
+		Surname         string `json:"surname"`
+		Email           string `json:"email"`
+		PhoneNumber     string `json:"phoneNumber"`
+		Password        string `json:"password"`
+		ConfirmPassword string `json:"confirmPassword"`
+	}
+
+res:
+
+if error: s-t 401
+
+eger  okeydirse, list gelecek
+
+[
+  {
+    "id": "X1394MEZ5635yx4mD8Ds3J52491JMg",
+    "companyId": "9HjwC6CqA19661w83o82487v2VxG31",
+    "isAdmin": 1,
+    "name": "sadasdad",
+    "surname": "sss",
+    "email": "m@etesTcs.com",
+    "phoneNumber": "0999999"
+  },
+  {
+    "id": "9P931xCfJJ6vrGV2839ZBS0p94744h",
+    "companyId": "9HjwC6CqA19661w83o82487v2VxG31",
+    "isAdmin": 0,
+    "name": "sadasdad",
+    "surname": "sss",
+    "email": "m2@etesTcs.com",
+    "phoneNumber": "0999999"
+  },
+  {
+    "id": "aIA1A926p4i3tHXiY8nAdur2u5519c",
+    "companyId": "9HjwC6CqA19661w83o82487v2VxG31",
+    "isAdmin": 0,
+    "name": "sadasdasfasdsadad",
+    "surname": "ssssss",
+    "email": "m222@etesTcs.com",
+    "phoneNumber": "0999sss999"
+  }
+]

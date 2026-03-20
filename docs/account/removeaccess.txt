@@ -1,0 +1,19 @@
+!!!!!!! sadece admin ucun
+
+req:
+DELETE http://localhost:7777/api/account/staff/:id/access?register=&token=
+
+res: 
+
+if error
+
+{"error": "Register query parameter is required"}
+
+404 {"error": "Staff member not found"}
+
+ {"error": "Failed to remove access"}
+
+
+eger her sey okeydirse
+
+{"message": "Access removed successfully"}

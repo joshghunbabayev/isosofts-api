@@ -1,0 +1,17 @@
+!!!!!!! sadece admin ucun
+
+req:
+PUT http://localhost:7777/api/account/staff/:id/active?token=
+
+res: 
+
+if error
+
+404 {"error": "Staff member not found"}
+
+500 {"error": "Operation failed"}
+}
+
+eger her sey okeydirse
+
+{"message": "Account activated"}

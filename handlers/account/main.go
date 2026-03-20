@@ -97,9 +97,10 @@ func (*AccountHandlers) SignUp(c *gin.Context) {
 	companyId := companyModel.GenerateUniqueId()
 
 	companyModel.Create(companyTypes.Company{
-		Id:     companyId,
-		Name:   body.CompanyName,
-		Domain: domain,
+		Id:       companyId,
+		Name:     body.CompanyName,
+		Domain:   domain,
+		IsActive: 1,
 	})
 
 	var accountModel accountModels.AccountModel

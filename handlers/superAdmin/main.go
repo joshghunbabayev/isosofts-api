@@ -110,6 +110,54 @@ func (*SuperAdminHandlers) CreateCompany(c *gin.Context) {
 	c.JSON(201, gin.H{"message": "Company created successfully"})
 }
 
+func (*SuperAdminHandlers) UpdateCompany(c *gin.Context) {
+	id := c.Param("companyId")
+	var companyModel companyModels.CompanyModel
+
+	company, err := companyModel.GetById(id)
+	if err != nil || company.IsEmpty() {
+		c.JSON(404, gin.H{"error": "Company not found"})
+		return
+	}
+
+	var body struct {
+		Name   string `json:"name"`
+		Domain string `json:"domain"`
+	}
+
+	if err := c.ShouldBindJSON(&body); err != nil {
+		c.JSON(400, gin.H{"error": "Invalid format"})
+		return
+	}
+
+	errs := make(map[string]string)
+	if strings.TrimSpace(body.Name) == "" {
+		errs["name"] = "Company name is required"
+	}
+	if strings.TrimSpace(body.Domain) == "" {
+		errs["domain"] = "Domain is required"
+	} else if !strings.Contains(body.Domain, ".") {
+		errs["domain"] = "Invalid domain format"
+	}
+
+	if len(errs) > 0 {
+		c.IndentedJSON(400, gin.H{"errors": errs})
+		return
+	}
+
+	err = companyModel.Update(id, map[string]interface{}{
+		"name":   body.Name,
+		"domain": strings.ToLower(body.Domain),
+	})
+
+	if err != nil {
+		c.JSON(500, gin.H{"error": "Failed to update company"})
+		return
+	}
+
+	c.JSON(200, gin.H{"message": "Company updated successfully"})
+}
+
 func (*SuperAdminHandlers) ActivateCompany(c *gin.Context) {
 	companyId := c.Param("companyId")
 	var companyModel companyModels.CompanyModel

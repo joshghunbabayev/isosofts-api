@@ -30,6 +30,25 @@ RES (400): { "errors": { "name": "...", "domain": "..." } }
 
 ---
 
+REQ: PUT /company/:companyId?token={JWT}
+DESC: Şirkətin adını və ya domenini redaktə edir.
+BODY:
+{
+    "name": "Updated Company Name",
+    "domain": "newdomain.com"
+}
+RES (200): { "message": "Company updated successfully" }
+RES (400): 
+{ 
+    "errors": { 
+        "name": "Company name is required",
+        "domain": "Invalid domain format" 
+    } 
+}
+RES (404): { "error": "Company not found" }
+
+---
+
 REQ: GET /account?token={JWT}&isActive={1|0}&companyId={id}
 DESC: Bütün sistemdəki (bütün şirkətlər daxil) istifadəçiləri gətirir.
 RES (200): [ {Account Object}, ... ]

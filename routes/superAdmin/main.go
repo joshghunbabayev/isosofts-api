@@ -16,11 +16,12 @@ func MainRoutes(rg *gin.RouterGroup) {
 	auth.Use(middlewares.SuperAdminAuthMiddleware())
 	{
 		auth.GET("/company", h.GetAllCompanies)
-		auth.POST("/company", h.GetAllCompanies)
+		auth.POST("/company", h.CreateCompany)
 		auth.GET("/account", h.GetAllAccounts)
 
 		company := auth.Group("/company/:companyId")
 		{
+			company.PUT("", h.UpdateCompany)
 			company.GET("/account", h.GetCompanyAccounts)
 			company.POST("/account", h.Create)
 			company.PUT("/active", h.ActivateCompany)

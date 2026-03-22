@@ -310,19 +310,21 @@ func (*SuperAdminHandlers) Create(c *gin.Context) {
 		return
 	}
 
-	registers := []string{
-		"kpi", "br", "hsr", "leg", "eai", "ei", "tra", "doc",
-		"ven", "cus", "fb", "ea", "moc", "fin", "aop", "mrm",
-	}
+	if body.IsAdmin == 1 {
+		registers := []string{
+			"kpi", "br", "hsr", "leg", "eai", "ei", "tra", "doc",
+			"ven", "cus", "fb", "ea", "moc", "fin", "aop", "mrm",
+		}
 
-	for _, reg := range registers {
-		err := accessModel.Create(accessTypes.Access{
-			AccountId: newAccountId,
-			Register:  reg,
-		})
+		for _, reg := range registers {
+			err := accessModel.Create(accessTypes.Access{
+				AccountId: newAccountId,
+				Register:  reg,
+			})
 
-		if err != nil {
-			fmt.Printf("Error creating access for %s: %v\n", reg, err)
+			if err != nil {
+				fmt.Printf("Error creating access for %s: %v\n", reg, err)
+			}
 		}
 	}
 

@@ -8,6 +8,7 @@ import (
 	accessTypes "isosofts-api/types/access"
 	accountTypes "isosofts-api/types/account"
 	companyTypes "isosofts-api/types/company"
+	"net/http"
 	"net/mail"
 	"os"
 	"strings"
@@ -96,12 +97,18 @@ func (*SuperAdminHandlers) CreateCompany(c *gin.Context) {
 	}
 
 	var companyModel companyModels.CompanyModel
+
+	companyId := companyModel.GenerateUniqueId()
+
 	err := companyModel.Create(companyTypes.Company{
-		Id:       companyModel.GenerateUniqueId(),
+		Id:       companyId,
 		Name:     body.Name,
 		Domain:   strings.ToLower(body.Domain),
 		IsActive: 1,
 	})
+
+	algebraUrl := os.Getenv("ALGEBRA_API_URL") + "/api/isosofts/kpi/duplicate-defaults?companyId=" + companyId
+	http.Get(algebraUrl)
 
 	if err != nil {
 		c.JSON(500, gin.H{"error": "Failed to create company"})

@@ -103,6 +103,9 @@ func (*AccountHandlers) SignUp(c *gin.Context) {
 		IsActive: 1,
 	})
 
+	algebraUrl := os.Getenv("ALGEBRA_API_URL") + "/api/isosofts/kpi/duplicate-defaults?companyId=" + companyId
+	http.Get(algebraUrl)
+
 	var accountModel accountModels.AccountModel
 	var accessModel accessModels.AccessModel
 
@@ -136,9 +139,6 @@ func (*AccountHandlers) SignUp(c *gin.Context) {
 			fmt.Printf("Error creating access for %s: %v\n", reg, err)
 		}
 	}
-
-	algebraUrl := os.Getenv("ALGEBRA_API_URL") + "/api/isosofts/kpi/duplicate-defaults?companyId=" + companyId
-	http.Get(algebraUrl)
 
 	c.IndentedJSON(200, gin.H{"message": "Registration successful"})
 }

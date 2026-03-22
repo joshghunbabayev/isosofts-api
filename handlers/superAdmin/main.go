@@ -288,22 +288,44 @@ func (*SuperAdminHandlers) Create(c *gin.Context) {
 	}
 
 	var accountModel accountModels.AccountModel
+	var accessModel accessModels.AccessModel
+
+	newAccountId := accountModel.GenerateUniqueId()
+
 	err := accountModel.Create(accountTypes.Account{
-		Id:          accountModel.GenerateUniqueId(),
-		CompanyId:   companyId,
-		IsAdmin:     body.IsAdmin,
-		IsActive:    1,
-		Name:        body.Name,
-		Surname:     body.Surname,
-		Email:       body.Email,
-		PhoneNumber: body.PhoneNumber,
-		Password:    body.Password,
+		Id:            newAccountId,
+		CompanyId:     companyId,
+		LineManagerId: "",
+		IsAdmin:       body.IsAdmin,
+		IsActive:      1,
+		Name:          body.Name,
+		Surname:       body.Surname,
+		Email:         body.Email,
+		PhoneNumber:   body.PhoneNumber,
+		Password:      body.Password,
 	})
 
 	if err != nil {
 		c.Status(500)
 		return
 	}
+
+	registers := []string{
+		"kpi", "br", "hsr", "leg", "eai", "ei", "tra", "doc",
+		"ven", "cus", "fb", "ea", "moc", "fin", "aop", "mrm",
+	}
+
+	for _, reg := range registers {
+		err := accessModel.Create(accessTypes.Access{
+			AccountId: newAccountId,
+			Register:  reg,
+		})
+
+		if err != nil {
+			fmt.Printf("Error creating access for %s: %v\n", reg, err)
+		}
+	}
+
 	c.JSON(201, gin.H{"message": "Account created"})
 }
 

@@ -252,8 +252,8 @@ func (*SuperAdminHandlers) Create(c *gin.Context) {
 		errs["phoneNumber"] = "Phone Number is required"
 	}
 
-	var companyModel companyModels.CompanyModel
-	company, _ := companyModel.GetById(companyId)
+	// var companyModel companyModels.CompanyModel
+	// company, _ := companyModel.GetById(companyId)
 
 	if body.Email == "" {
 		errs["email"] = "Email is required"
@@ -262,11 +262,11 @@ func (*SuperAdminHandlers) Create(c *gin.Context) {
 		if err != nil {
 			errs["email"] = "Invalid email format"
 		} else {
-			parts := strings.Split(body.Email, "@")
-			domain := strings.ToLower(parts[1])
-			if domain != strings.ToLower(company.Domain) {
-				errs["email"] = fmt.Sprintf("Email must belong to domain: %s", company.Domain)
-			}
+			// parts := strings.Split(body.Email, "@")
+			// domain := strings.ToLower(parts[1])
+			// if domain != strings.ToLower(company.Domain) {
+			// 	errs["email"] = fmt.Sprintf("Email must belong to domain: %s", company.Domain)
+			// }
 			var accountModel accountModels.AccountModel
 			existing, _ := accountModel.GetAll(map[string]interface{}{"email": body.Email})
 			if len(existing) > 0 {
@@ -377,12 +377,12 @@ func (*SuperAdminHandlers) Update(c *gin.Context) {
 		if err != nil {
 			errs["email"] = "Invalid email format"
 		} else {
-			var companyModel companyModels.CompanyModel
-			company, _ := companyModel.GetById(account.CompanyId)
-			parts := strings.Split(body.Email, "@")
-			if strings.ToLower(parts[1]) != strings.ToLower(company.Domain) {
-				errs["email"] = fmt.Sprintf("Email must belong to domain: %s", company.Domain)
-			}
+			// var companyModel companyModels.CompanyModel
+			// company, _ := companyModel.GetById(account.CompanyId)
+			// parts := strings.Split(body.Email, "@")
+			// if strings.ToLower(parts[1]) != strings.ToLower(company.Domain) {
+			// 	errs["email"] = fmt.Sprintf("Email must belong to domain: %s", company.Domain)
+			// }
 			existing, _ := accountModel.GetAll(map[string]interface{}{"email": body.Email})
 			if len(existing) > 0 {
 				errs["email"] = "Email already taken"

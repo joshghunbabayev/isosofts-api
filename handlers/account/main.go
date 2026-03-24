@@ -439,14 +439,14 @@ func (*AccountHandlers) Update(c *gin.Context) {
 		if err != nil {
 			errs["email"] = "Invalid email format"
 		} else {
-			var companyModel companyModels.CompanyModel
-			company, _ := companyModel.GetById(admin.CompanyId)
-			parts := strings.Split(body.Email, "@")
-			domain := strings.ToLower(parts[1])
+			// var companyModel companyModels.CompanyModel
+			// company, _ := companyModel.GetById(admin.CompanyId)
+			// parts := strings.Split(body.Email, "@")
+			// domain := strings.ToLower(parts[1])
 
-			if domain != strings.ToLower(company.Domain) {
-				errs["email"] = fmt.Sprintf("Email must belong to the company domain: %s", company.Domain)
-			}
+			// if domain != strings.ToLower(company.Domain) {
+			// 	errs["email"] = fmt.Sprintf("Email must belong to the company domain: %s", company.Domain)
+			// }
 
 			existing, _ := accountModel.GetAll(map[string]interface{}{"email": body.Email})
 			if len(existing) > 0 {

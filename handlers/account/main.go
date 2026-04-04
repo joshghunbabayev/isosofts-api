@@ -103,7 +103,7 @@ func (*AccountHandlers) SignUp(c *gin.Context) {
 		IsActive: 1,
 	})
 
-	algebraUrl := os.Getenv("ALGEBRA_API_URL") + "/api/isosofts/kpi/duplicate-defaults?companyId=" + companyId
+	algebraUrl := os.Getenv("ALGEBRA_API_URL") + "/api/isosofts/qhseKpi/duplicate-defaults?companyId=" + companyId
 	http.Get(algebraUrl)
 
 	var accountModel accountModels.AccountModel

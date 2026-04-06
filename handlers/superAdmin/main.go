@@ -312,7 +312,7 @@ func (*SuperAdminHandlers) Create(c *gin.Context) {
 
 	if body.IsAdmin == 1 {
 		registers := []string{
-			"kpi", "br", "hsr", "leg", "eai", "ei", "tra", "doc",
+			"kpi", "opi", "br", "hsr", "leg", "eai", "ei", "tra", "doc",
 			"ven", "cus", "fb", "ea", "moc", "fin", "aop", "mrm",
 		}
 
